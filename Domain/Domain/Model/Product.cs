@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,14 +10,12 @@ namespace Domain.Model
     {
         [Key]
         public Guid Id { get; set; }
-        public Guid RestaurantId { get; set; }
-        public Guid CategoryId { get; set; }
+        public Guid? RestaurantId { get; set; }
+        public Guid? CategoryId { get; set; }
 
-        [Required]
         [ForeignKey(nameof(RestaurantId))]
         public virtual Restaurant Restaurant { get; set; }
 
-        [Required]
         [ForeignKey(nameof(CategoryId))]
         public virtual ProductCategory Category { get; set; }
 
@@ -30,5 +30,14 @@ namespace Domain.Model
         [Required]
         [Range(0, double.MaxValue)]
         public decimal Price { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
+
+        public ICollection<CartItem> CartItems { get; set; }
+
+        public Product()
+        {
+            OrderDetails = new Collection<OrderDetail>();
+            CartItems = new Collection<CartItem>();
+        }
     }
 }
