@@ -1,3 +1,4 @@
+using Infrastructure;
 using Infrastructure.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -42,6 +43,8 @@ namespace API
             {
                 endpoints.MapControllers();
             });
+
+            SeedData.EnsurePopulated(app);
         }
     }
 }
