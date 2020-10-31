@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Domain.Model;
+using Domain.Model.Verification;
 
 namespace Infrastructure.Context
 {
@@ -8,7 +9,8 @@ namespace Infrastructure.Context
     {
         public FoodDeliveryDbContext(DbContextOptions<FoodDeliveryDbContext> options):base(options)
         {
-        }
+
+        }        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -29,5 +31,7 @@ namespace Infrastructure.Context
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<RestaurantCategory> RestaurantCategories { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<VerificationState> VerificationStates { get; set; }
     }
 }

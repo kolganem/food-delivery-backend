@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class TestController : ControllerBase
@@ -13,11 +15,12 @@ namespace API.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("data")]
+        public IEnumerable<string> GetData()
         {
             return Summaries;
         }
+
         private static readonly string[] Summaries = {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
